@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ROYAL77</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#09090b;
+    color:white;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top,#1f2937 0%,#09090b 60%);
+    z-index:-1;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 25px;
+    background:rgba(17,24,39,.95);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    position:sticky;
+    top:0;
+    z-index:999;
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:700;
+    color:#facc15;
+    letter-spacing:2px;
+    text-shadow:0 0 15px #facc15;
+}
+
+.right-header{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.balance{
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    padding:10px 18px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.btn{
+    border:none;
+    padding:11px 18px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.deposit-btn{
+    background:linear-gradient(45deg,#22c55e,#16a34a);
+    color:white;
+}
+
+.withdraw-btn{
+    background:linear-gradient(45deg,#ef4444,#dc2626);
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.banner{
+    margin:25px auto;
+    width:92%;
+    height:220px;
+    border-radius:24px;
+    background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.banner h1{
+    font-size:42px;
+    color:#facc15;
+    text-shadow:0 0 15px #facc15;
+}
+
+.banner p{
+    margin-top:10px;
+    opacity:.8;
+}
+
+.container{
+    width:92%;
+    margin:auto;
+}
+
+.section-title{
+    margin-bottom:18px;
+    font-size:22px;
+    font-weight:600;
+}
+
+.games{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.game-card{
+    background:#111827;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.07);
+    transition:.3s;
+}
+
+.game-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 20px rgba(250,204,21,.15);
+}
+
+.game-card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+
+.game-info{
+    padding:15px;
+}
+
+.game-info h3{
+    margin-bottom:8px;
+}
+
+.play-btn{
+    margin-top:12px;
+    width:100%;
+    background:linear-gradient(45deg,#facc15,#eab308);
+    color:black;
+}
+
+.slot-wrapper{
+    margin-top:35px;
+    background:#111827;
+    padding:25px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.slot{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:25px 0;
+}
+
+.slot-box{
+    width:100px;
+    height:100px;
+    border-radius:20px;
+    background:#09090b;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+    border:2px solid #facc15;
+    box-shadow:0 0 15px rgba(250,204,21,.2);
+}
+
+.bet-area{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.bet-area input{
+    flex:1;
+    min-width:200px;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#09090b;
+    color:white;
+    outline:none;
+}
+
+.spin-btn{
+    background:linear-gradient(45deg,#facc15,#eab308);
+    color:black;
+    min-width:150px;
+}
+
+.result{
+    margin-top:15px;
+    text-align:center;
+    font-size:18px;
+    font-weight:600;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-box{
+    background:#111827;
+    width:90%;
+    max-width:400px;
+    padding:25px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.modal-box h2{
+    margin-bottom:18px;
+}
+
+.modal-box input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#09090b;
+    color:white;
+    margin-bottom:15px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.modal-buttons button{
+    flex:1;
+}
+
+footer{
+    margin-top:50px;
+    text-align:center;
+    padding:25px;
+    opacity:.6;
+}
+
+@media(max-width:700px){
+    .banner h1{
+        font-size:30px;
+    }
+
+    .slot-box{
+        width:80px;
+        height:80px;
+        font-size:34px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">ROYAL77</div>
+
+    <div class="right-header">
+        <div class="balance">
+            Rp <span id="saldo">250000</span>
+        </div>
+
+        <button class="btn deposit-btn" onclick="openDeposit()">Deposit</button>
+        <button class="btn withdraw-btn" onclick="fakeWithdraw()">Withdraw</button>
+    </div>
+</header>
+
+<div class="banner">
+    <h1>WELCOME TO ROYAL77</h1>
+    <p>Platform permainan online modern</p>
+</div>
+
+<div class="container">
+
+    <div class="section-title">Game Populer</div>
+
+    <div class="games">
+
+        <div class="game-card">
+            <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?q=80&w=1200&auto=format&fit=crop">
+            <div class="game-info">
+                <h3>Golden Slot</h3>
+                <p>Multiplier hingga x500</p>
+                <button class="btn play-btn">Mainkan</button>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+            <div class="game-info">
+                <h3>Fortune Wheel</h3>
+                <p>Spin keberuntungan</p>
+                <button class="btn play-btn">Mainkan</button>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="https://images.unsplash.com/photo-1511882150382-421056c89033?q=80&w=1200&auto=format&fit=crop">
+            <div class="game-info">
+                <h3>Lucky Dragon</h3>
+                <p>Bonus free spin</p>
+                <button class="btn play-btn">Mainkan</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="slot-wrapper">
+
+        <div class="section-title">Mesin Slot</div>
+
+        <div class="bet-area">
+            <input type="number" id="betInput" placeholder="Masukkan taruhan">
+            <button class="btn spin-btn" onclick="spin()">SPIN</button>
+        </div>
+
+        <div class="slot">
+            <div class="slot-box" id="s1">🍒</div>
+            <div class="slot-box" id="s2">💎</div>
+            <div class="slot-box" id="s3">7️⃣</div>
+        </div>
+
+        <div class="result" id="resultText">
+            Semoga beruntung
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 ROYAL77 All Rights Reserved
+</footer>
+
+<div class="modal" id="depositModal">
+    <div class="modal-box">
+        <h2>Deposit</h2>
+
+        <input type="number" id="depositAmount" placeholder="Masukkan nominal">
+
+        <div class="modal-buttons">
+            <button class="btn deposit-btn" onclick="processDeposit()">Kirim</button>
+            <button class="btn withdraw-btn" onclick="closeDeposit()">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let saldo = 250000;
+
+function updateSaldo(){
+    document.getElementById('saldo').innerText = saldo.toLocaleString('id-ID');
+}
+
+function openDeposit(){
+    document.getElementById('depositModal').style.display='flex';
+}
+
+function closeDeposit(){
+    document.getElementById('depositModal').style.display='none';
+}
+
+function processDeposit(){
+
+    let amount = parseInt(document.getElementById('depositAmount').value);
+
+    if(isNaN(amount) || amount <= 0){
+        alert('Masukkan nominal valid');
+        return;
+    }
+
+    saldo += amount;
+    updateSaldo();
+    closeDeposit();
+
+    alert('Deposit berhasil diproses');
+}
+
+function fakeWithdraw(){
+    alert('Penarikan sedang diproses');
+}
+
+const symbols = ['🍒','💎','7️⃣','⭐','🍋'];
+
+function rand(){
+    return symbols[Math.floor(Math.random()*symbols.length)];
+}
+
+function spin(){
+
+    let bet = parseInt(document.getElementById('betInput').value);
+
+    if(isNaN(bet) || bet <= 0){
+        alert('Masukkan taruhan');
+        return;
+    }
+
+    if(bet > saldo){
+        alert('Saldo tidak cukup');
+        return;
+    }
+
+    saldo -= bet;
+
+    let a = rand();
+    let b = rand();
+    let c = rand();
+
+    document.getElementById('s1').innerText = a;
+    document.getElementById('s2').innerText = b;
+    document.getElementById('s3').innerText = c;
+
+    let text = document.getElementById('resultText');
+
+    if(a === b && b === c){
+
+        let hadiah = bet * 5;
+        saldo += hadiah;
+
+        text.innerHTML = `🎉 JACKPOT Rp ${hadiah.toLocaleString('id-ID')}`;
+
+    }else{
+        text.innerHTML = 'Coba lagi';
+    }
+
+    updateSaldo();
+}
+
+updateSaldo();
+</script>
+
+</body>
+  </html>
