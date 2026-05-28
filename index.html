@@ -375,7 +375,7 @@ TOP UP
 <button class="main-btn"
 style="width:auto;padding:10px 18px"
 onclick="openRedeem()">
-REDEEM
+TARIK SALDO
 </button>
 
   </div>
@@ -521,13 +521,13 @@ style="display:none">
 
 <div class="popup-box">
 
-<h1>REDEEM COIN</h1>
+<h1>TARIK UANG</h1>
 
-<p>Minimal 100.000 Coin</p>
+<p>Minimal 100.000</p>
 
 <input type="text"
-id="nickname"
-placeholder="Masukkan nickname">
+id="rekening"
+placeholder="Nomor Dana">
 
 <input type="number"
 id="redeemInput"
@@ -783,7 +783,7 @@ document.getElementById("nickname").value;
 
 if(!nick){
 
-alert("Masukkan nickname");
+alert("Masukkan nomor dana");
 
 return;
 
@@ -813,7 +813,7 @@ document.getElementById("saldo").innerText =
 saldo.toLocaleString("id-ID");
 
 alert(
-"Redeem berhasil diproses"
+"Uang berhasil dikirim"
 );
 
 closeRedeem();
