@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASHRAF77</title>
+
+<style>
+body{
+    margin:0;
+    background:#0b1020;
+    color:white;
+    font-family:Arial;
+    overflow-x:hidden;
+}
+
+header{
+    padding:15px;
+    background:#111827;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:2px solid gold;
+}
+
+.logo{
+    font-size:28px;
+    color:gold;
+    font-weight:bold;
+}
+
+.container{
+    width:95%;
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:#111827;
+    padding:20px;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    margin-bottom:12px;
+    background:#1f2937;
+    color:white;
+}
+
+button{
+    padding:14px 20px;
+    border:none;
+    border-radius:12px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.reels{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+
+.reel{
+    width:110px;
+    height:110px;
+    background:#0f172a;
+    border:3px solid gold;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.reel img{
+    width:80%;
+}
+
+.roll{
+    animation:spin .08s linear infinite;
+}
+
+@keyframes spin{
+    0%{transform:translateY(-5px)}
+    50%{transform:translateY(5px)}
+    100%{transform:translateY(-5px)}
+}
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-box{
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    border:2px solid gold;
+}
+
+.bigwin{
+    font-size:40px;
+    color:gold;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">ASHRAF77</div>
+    <div>
+        Saldo: Rp <span id="saldo">100000</span>
+    </div>
+</header>
+
+<div class="container">
+
+<div class="card" id="authBox">
+
+<h2>Login / Register</h2>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Masuk</button>
+
+</div>
+
+<div class="card" id="gameBox" style="display:none">
+
+<h2>ZEUS SPIN</h2>
+
+<input type="number" id="bet" placeholder="Masukkan taruhan">
+
+<button onclick="spin()">SPIN</button>
+
+<div class="reels">
+
+<div class="reel">
+<img id="r1" src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png">
+</div>
+
+<div class="reel">
+<img id="r2" src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png">
+</div>
+
+<div class="reel">
+<img id="r3" src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="popup" id="popup">
+<div class="popup-box">
+<div class="bigwin">BIG WIN</div>
+<p id="winText"></p>
+<button onclick="closePopup()">Tutup</button>
+</div>
+</div>
+
+<audio id="spinSound" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="winSound" src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3"></audio>
+
+<script>
+
+let saldo = localStorage.getItem("saldo")
+? parseInt(localStorage.getItem("saldo"))
+: 100000;
+
+document.getElementById("saldo").innerText =
+saldo.toLocaleString("id-ID");
+
+const images = [
+"https://cdn-icons-png.flaticon.com/512/3523/3523063.png",
+"https://cdn-icons-png.flaticon.com/512/833/833472.png",
+"https://cdn-icons-png.flaticon.com/512/616/616490.png"
+];
+
+function login(){
+
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(!user || !pass){
+        alert("Isi semua");
+        return;
+    }
+
+    localStorage.setItem("user", user);
+
+    document.getElementById("authBox").style.display="none";
+    document.getElementById("gameBox").style.display="block";
+}
+
+if(localStorage.getItem("user")){
+    document.getElementById("authBox").style.display="none";
+    document.getElementById("gameBox").style.display="block";
+}
+
+function randomImage(){
+    return images[Math.floor(Math.random()*images.length)];
+}
+
+function spin(){
+
+    let bet = parseInt(document.getElementById("bet").value);
+
+    if(isNaN(bet) || bet <= 0){
+        alert("Masukkan taruhan");
+        return;
+    }
+
+    if(bet > saldo){
+        alert("Saldo tidak cukup");
+        return;
+    }
+
+    saldo -= bet;
+
+    document.getElementById("spinSound").play();
+
+    let r1 = document.getElementById("r1");
+    let r2 = document.getElementById("r2");
+    let r3 = document.getElementById("r3");
+
+    r1.classList.add("roll");
+    r2.classList.add("roll");
+    r3.classList.add("roll");
+
+    let interval = setInterval(()=>{
+
+        r1.src = randomImage();
+        r2.src = randomImage();
+        r3.src = randomImage();
+
+    },100);
+
+    setTimeout(()=>{
+
+        clearInterval(interval);
+
+        r1.classList.remove("roll");
+        r2.classList.remove("roll");
+        r3.classList.remove("roll");
+
+        let a = randomImage();
+        let b = randomImage();
+        let c = randomImage();
+
+        r1.src = a;
+        r2.src = b;
+        r3.src = c;
+
+        if(a === b && b === c){
+
+            let hadiah = bet * 5;
+
+            saldo += hadiah;
+
+            document.getElementById("winSound").play();
+
+            document.getElementById("popup").style.display="flex";
+
+            document.getElementById("winText").innerHTML =
+            "Menang Rp " + hadiah.toLocaleString("id-ID");
+
+        }
+
+        localStorage.setItem("saldo", saldo);
+
+        document.getElementById("saldo").innerText =
+        saldo.toLocaleString("id-ID");
+
+    },2000);
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+</script>
+
+</body>
+  </html>
