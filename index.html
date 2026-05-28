@@ -364,6 +364,21 @@ height:85px;
 
 <div class="balance">
 Saldo: Rp <span id="saldo">100000</span>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+<button class="main-btn"
+style="width:auto;padding:10px 18px"
+onclick="openTopup()">
+TOP UP
+</button>
+
+<button class="main-btn"
+style="width:auto;padding:10px 18px"
+onclick="openRedeem()">
+REDEEM
+</button>
+
+  </div>
 </div>
 </header>
 
@@ -470,7 +485,69 @@ TUTUP
 
 </div>
 </div>
+<div class="popup"
+id="topupPopup"
+style="display:none">
 
+<div class="popup-box">
+
+<h1>TOP UP COIN</h1>
+
+<p>Minimal 100.000 Coin</p>
+
+<input type="number"
+id="topupInput"
+placeholder="Masukkan nominal">
+
+<button class="main-btn"
+onclick="topupCoin()">
+KONFIRMASI
+</button>
+
+<br><br>
+
+<button class="main-btn"
+style="background:#ef4444;color:white"
+onclick="closeTopup()">
+TUTUP
+</button>
+
+</div>
+</div>
+
+<div class="popup"
+id="redeemPopup"
+style="display:none">
+
+<div class="popup-box">
+
+<h1>REDEEM COIN</h1>
+
+<p>Minimal 100.000 Coin</p>
+
+<input type="text"
+id="nickname"
+placeholder="Masukkan nickname">
+
+<input type="number"
+id="redeemInput"
+placeholder="Masukkan nominal">
+
+<button class="main-btn"
+onclick="redeemCoin()">
+KONFIRMASI
+</button>
+
+<br><br>
+
+<button class="main-btn"
+style="background:#ef4444;color:white"
+onclick="closeRedeem()">
+TUTUP
+</button>
+
+</div>
+</div>
 <footer>
 © 2026 ASHRAF77
 </footer>
@@ -545,10 +622,14 @@ function spin(){
 
 let bet = parseInt(document.getElementById("bet").value);
 
-if(isNaN(bet) || bet <= 0){
-alert("Masukkan taruhan");
+if(isNaN(bet) || bet < 100000){
+
+alert("Minimal taruhan 100.000");
+
 return;
-}
+
+  }
+
 
 if(bet > saldo){
 alert("Saldo tidak cukup");
@@ -631,6 +712,113 @@ document.getElementById("bigPopup").style.display =
 "none";
 
 }
+
+  function openTopup(){
+
+document.getElementById("topupPopup")
+.style.display="flex";
+
+}
+
+function closeTopup(){
+
+document.getElementById("topupPopup")
+.style.display="none";
+
+}
+
+function openRedeem(){
+
+document.getElementById("redeemPopup")
+.style.display="flex";
+
+}
+
+function closeRedeem(){
+
+document.getElementById("redeemPopup")
+.style.display="none";
+
+}
+
+function topupCoin(){
+
+let amount =
+parseInt(
+document.getElementById("topupInput").value
+);
+
+if(isNaN(amount) || amount < 100000){
+
+alert("Minimal top up 100.000");
+
+return;
+
+}
+
+saldo += amount;
+
+localStorage.setItem("saldo",saldo);
+
+document.getElementById("saldo").innerText =
+saldo.toLocaleString("id-ID");
+
+alert(
+"Top up coin berhasil"
+);
+
+closeTopup();
+
+}
+
+function redeemCoin(){
+
+let amount =
+parseInt(
+document.getElementById("redeemInput").value
+);
+
+let nick =
+document.getElementById("nickname").value;
+
+if(!nick){
+
+alert("Masukkan nickname");
+
+return;
+
+}
+
+if(isNaN(amount) || amount < 100000){
+
+alert("Minimal redeem 100.000");
+
+return;
+
+}
+
+if(amount > saldo){
+
+alert("Saldo tidak cukup");
+
+return;
+
+}
+
+saldo -= amount;
+
+localStorage.setItem("saldo",saldo);
+
+document.getElementById("saldo").innerText =
+saldo.toLocaleString("id-ID");
+
+alert(
+"Redeem berhasil diproses"
+);
+
+closeRedeem();
+
+  }
 
 </script>
 
