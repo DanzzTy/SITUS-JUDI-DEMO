@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ASHRAF77 DEMO WORLD</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#070b16;
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top,#1f2937 0%,#070b16 70%);
+z-index:-2;
+}
+
+.money{
+position:fixed;
+top:-50px;
+font-size:24px;
+animation:fall linear infinite;
+opacity:.7;
+z-index:9999;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-50px) rotate(0deg);
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup-box{
+width:90%;
+max-width:420px;
+background:#111827;
+border-radius:25px;
+padding:30px;
+text-align:center;
+border:2px solid gold;
+box-shadow:0 0 40px rgba(255,215,0,.3);
+}
+
+.popup-box h1{
+color:gold;
+font-size:34px;
+margin-bottom:10px;
+}
+
+.popup-box p{
+opacity:.8;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border:none;
+border-radius:14px;
+background:#1f2937;
+color:white;
+outline:none;
+}
+
+button{
+border:none;
+padding:14px;
+border-radius:14px;
+cursor:pointer;
+font-weight:bold;
+transition:.3s;
+}
+
+.main-btn{
+width:100%;
+background:linear-gradient(45deg,gold,#f59e0b);
+color:black;
+}
+
+.main-btn:hover{
+transform:scale(1.03);
+}
+
+header{
+background:#111827;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:2px solid gold;
+position:sticky;
+top:0;
+z-index:999;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+color:gold;
+text-shadow:0 0 15px gold;
+}
+
+.balance{
+background:#0f172a;
+padding:10px 18px;
+border-radius:12px;
+font-weight:600;
+}
+
+.container{
+width:94%;
+max-width:1200px;
+margin:auto;
+padding:25px 0;
+}
+
+.banner{
+height:230px;
+border-radius:28px;
+overflow:hidden;
+position:relative;
+margin-bottom:30px;
+background:
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.6)),
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1600&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.banner h1{
+font-size:48px;
+color:gold;
+text-shadow:0 0 20px gold;
+}
+
+.banner p{
+margin-top:10px;
+opacity:.85;
+}
+
+.section-title{
+font-size:24px;
+font-weight:700;
+margin-bottom:18px;
+}
+
+.games{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.game-card{
+background:#111827;
+border-radius:24px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,.08);
+transition:.35s;
+}
+
+.game-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px rgba(255,215,0,.15);
+}
+
+.game-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.game-info{
+padding:18px;
+}
+
+.game-info h2{
+margin-bottom:8px;
+color:gold;
+}
+
+.play-btn{
+width:100%;
+margin-top:15px;
+background:linear-gradient(45deg,gold,#f59e0b);
+color:black;
+}
+
+.slot-page{
+display:none;
+margin-top:35px;
+background:#111827;
+padding:25px;
+border-radius:28px;
+transition:.4s;
+}
+
+.reels{
+display:flex;
+justify-content:center;
+gap:18px;
+margin:25px 0;
+}
+
+.reel{
+width:110px;
+height:110px;
+border-radius:22px;
+background:#0f172a;
+display:flex;
+align-items:center;
+justify-content:center;
+border:2px solid gold;
+overflow:hidden;
+}
+
+.reel img{
+width:85%;
+height:85%;
+object-fit:contain;
+}
+
+.roll{
+animation:roll .08s linear infinite;
+}
+
+@keyframes roll{
+0%{transform:translateY(-5px)}
+50%{transform:translateY(5px)}
+100%{transform:translateY(-5px)}
+}
+
+.bet-area{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.bet-area input{
+flex:1;
+margin:0;
+}
+
+.spin-btn{
+min-width:150px;
+background:linear-gradient(45deg,gold,#f59e0b);
+color:black;
+}
+
+.result{
+margin-top:18px;
+text-align:center;
+font-size:20px;
+font-weight:700;
+}
+
+.big-popup{
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.7);
+z-index:9999;
+}
+
+.big-box{
+background:#111827;
+padding:35px;
+border-radius:28px;
+text-align:center;
+border:2px solid gold;
+animation:zoom .4s ease;
+}
+
+@keyframes zoom{
+from{
+transform:scale(.5);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.big-box h1{
+font-size:55px;
+color:gold;
+text-shadow:0 0 20px gold;
+}
+
+footer{
+margin-top:50px;
+padding:30px;
+text-align:center;
+opacity:.7;
+}
+
+@media(max-width:700px){
+
+.banner h1{
+font-size:34px;
+}
+
+.reel{
+width:85px;
+height:85px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="popup" id="loginPopup">
+<div class="popup-box">
+
+<h1>ASHRAF77</h1>
+<p>DEMO WORLD</p>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+
+<button class="main-btn" onclick="login()">
+LOGIN / DAFTAR
+</button>
+
+</div>
+</div>
+
+<header>
+
+<div class="logo">
+ASHRAF77
+</div>
+
+<div class="balance">
+
+Saldo:
+Rp <span id="saldo">100000</span>
+
+<div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+
+<button class="main-btn"
+style="width:auto;padding:10px 18px"
+onclick="openTopup()">
+TOP UP
+</button>
+
+<button class="main-btn"
+style="width:auto;padding:10px 18px"
+onclick="openRedeem()">
+TARIK
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="banner">
+
+<h1>DEMO SLOT GAME</h1>
+<p>Fantasy Spin Experience</p>
+
+</div>
+
+<div class="section-title">
+TOP GAMES
+</div>
+
+<div class="games">
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?q=80&w=1200&auto=format&fit=crop">
+
+<div class="game-info">
+
+<h2>⚡ ZEUS POWER</h2>
+
+<p>Petir bonus max win</p>
+
+<button class="play-btn"
+onclick="openGame('ZEUS POWER')">
+PLAY
+</button>
+
+</div>
+</div>
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+
+<div class="game-info">
+
+<h2>🐉 DRAGON FIRE</h2>
+
+<p>Naga api keberuntungan</p>
+
+<button class="play-btn"
+onclick="openGame('DRAGON FIRE')">
+PLAY
+</button>
+
+</div>
+</div>
+
+<div class="game-card">
+
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop">
+
+<div class="game-info">
+
+<h2>👑 FORTUNE KING</h2>
+
+<p>Raja spin keberuntungan</p>
+
+<button class="play-btn"
+onclick="openGame('FORTUNE KING')">
+PLAY
+</button>
+
+</div>
+</div>
+
+</div>
+
+<div class="slot-page" id="slotPage">
+
+<button
+class="main-btn"
+style="
+width:auto;
+margin-bottom:20px;
+background:#ef4444;
+color:white;
+"
+onclick="closeGame()">
+← KEMBALI
+</button>
+
+<h2 id="gameTitle">
+⚡ ZEUS POWER
+</h2>
+
+<p id="gameDesc"
+style="
+opacity:.8;
+margin-top:5px;
+margin-bottom:20px;
+">
+Game Demo
+</p>
+
+<div class="bet-area">
+
+<input
+type="number"
+id="bet"
+placeholder="Masukkan taruhan">
+
+<button
+class="spin-btn"
+onclick="spin()">
+SPIN
+</button>
+
+</div>
+
+<div class="reels">
+
+<div class="reel">
+<img id="r1"
+src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+</div>
+
+<div class="reel">
+<img id="r2"
+src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png">
+</div>
+
+<div class="reel">
+<img id="r3"
+src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+</div>
+
+</div>
+
+<div class="result" id="result">
+Tekan spin untuk bermain
+</div>
+
+</div>
+
+</div>
+
+<div class="big-popup" id="bigPopup">
+
+<div class="big-box">
+
+<h1>BIG WIN</h1>
+
+<p id="winText"></p>
+
+<button class="main-btn"
+onclick="closePopup()">
+TUTUP
+</button>
+
+</div>
+
+</div>
+
+<div class="popup"
+id="topupPopup"
+style="display:none">
+
+<div class="popup-box">
+
+<h1>TOP UP</h1>
+
+<input type="number"
+id="topupInput"
+placeholder="Masukkan nominal">
+
+<button class="main-btn"
+onclick="topupCoin()">
+KONFIRMASI
+</button>
+
+<br><br>
+
+<button class="main-btn"
+style="background:#ef4444;color:white"
+onclick="closeTopup()">
+TUTUP
+</button>
+
+</div>
+
+</div>
+
+<div class="popup"
+id="redeemPopup"
+style="display:none">
+
+<div class="popup-box">
+
+<h1>TARIK SALDO</h1>
+
+<input type="text"
+id="rekening"
+placeholder="Nomor Dana">
+
+<input type="number"
+id="redeemInput"
+placeholder="Masukkan nominal">
+
+<button class="main-btn"
+onclick="redeemCoin()">
+KONFIRMASI
+</button>
+
+<br><br>
+
+<button class="main-btn"
+style="background:#ef4444;color:white"
+onclick="closeRedeem()">
+TUTUP
+</button>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 ASHRAF77 DEMO
+</footer>
+
+<audio id="spinSound"
+src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+
+<audio id="winSound"
+src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3"></audio>
+
+<script>
+
+let saldo = localStorage.getItem("saldo")
+? parseInt(localStorage.getItem("saldo"))
+: 100000;
+
+document.getElementById("saldo").innerText =
+saldo.toLocaleString("id-ID");
+
+if(localStorage.getItem("user")){
+document.getElementById("loginPopup").style.display="none";
+}
+
+function updateSaldo(){
+
+localStorage.setItem("saldo",saldo);
+
+document.getElementById("saldo").innerText =
+saldo.toLocaleString("id-ID");
+
+}
+
+function login(){
+
+let user =
+document.getElementById("username").value;
+
+let pass =
+document.getElementById("password").value;
+
+if(!user || !pass){
+
+alert("Isi semua data");
+
+return;
+
+}
+
+localStorage.setItem("user",user);
+
+document.getElementById("loginPopup")
+.style.display="none";
+
+}
+
+function openGame(name){
+
+const slotPage =
+document.getElementById("slotPage");
+
+slotPage.style.display = "block";
+
+let title = "";
+let desc = "";
+let color = "";
+
+if(name === "ZEUS POWER"){
+
+title = "⚡ ZEUS POWER";
+desc = "Petir bonus max win";
+color = "#f59e0b";
+
+}
+
+else if(name === "DRAGON FIRE"){
+
+title = "🐉 DRAGON FIRE";
+desc = "Naga api keberuntungan";
+color = "#ef4444";
+
+}
+
+else if(name === "FORTUNE KING"){
+
+title = "👑 FORTUNE KING";
+desc = "Raja spin keberuntungan";
+color = "#22c55e";
+
+}
+
+document.getElementById("gameTitle").innerText =
+title;
+
+document.getElementById("gameDesc").innerText =
+desc;
+
+slotPage.style.border =
+"2px solid " + color;
+
+slotPage.style.boxShadow =
+"0 0 30px " + color;
+
+window.scrollTo({
+top:slotPage.offsetTop - 70,
+behavior:"smooth"
+});
+
+}
+
+function closeGame(){
+
+document.getElementById("slotPage")
+.style.display = "none";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+const imgs = [
+
+"https://cdn-icons-png.flaticon.com/512/833/833472.png",
+
+"https://cdn-icons-png.flaticon.com/512/3523/3523063.png",
+
+"https://cdn-icons-png.flaticon.com/512/616/616554.png"
+
+];
+
+function rand(){
+
+return imgs[
+Math.floor(Math.random()*imgs.length)
+];
+
+}
+
+for(let i=0;i<20;i++){
+
+let m = document.createElement("div");
+
+m.className = "money";
+
+m.innerHTML = "💸";
+
+m.style.left = Math.random()*100+"vw";
+
+m.style.animationDuration =
+(4+Math.random()*6)+"s";
+
+document.body.appendChild(m);
+
+}
+
+let spinning = false;
+
+function spin(){
+
+if(spinning) return;
+
+let bet =
+parseInt(document.getElementById("bet").value);
+
+if(isNaN(bet) || bet < 1000){
+
+alert("Minimal taruhan 1.000");
+
+return;
+
+}
+
+if(bet > saldo){
+
+alert("Saldo tidak cukup");
+
+return;
+
+}
+
+spinning = true;
+
+saldo -= bet;
+
+updateSaldo();
+
+document.getElementById("spinSound").play();
+
+let r1 = document.getElementById("r1");
+let r2 = document.getElementById("r2");
+let r3 = document.getElementById("r3");
+
+r1.classList.add("roll");
+r2.classList.add("roll");
+r3.classList.add("roll");
+
+let rolling = setInterval(()=>{
+
+r1.src = rand();
+r2.src = rand();
+r3.src = rand();
+
+},100);
+
+setTimeout(()=>{
+
+clearInterval(rolling);
+
+r1.classList.remove("roll");
+r2.classList.remove("roll");
+r3.classList.remove("roll");
+
+let a = rand();
+let b = rand();
+let c = rand();
+
+r1.src = a;
+r2.src = b;
+r3.src = c;
+
+if(a === b && b === c){
+
+let hadiah = bet * 5;
+
+saldo += hadiah;
+
+updateSaldo();
+
+document.getElementById("winSound").play();
+
+document.getElementById("bigPopup")
+.style.display="flex";
+
+document.getElementById("winText")
+.innerHTML =
+"Menang Rp " +
+hadiah.toLocaleString("id-ID");
+
+document.getElementById("result")
+.innerHTML =
+"⚡ BIG WIN ⚡";
+
+}else{
+
+document.getElementById("result")
+.innerHTML =
+"Belum beruntung";
+
+}
+
+spinning = false;
+
+},2200);
+
+}
+
+function closePopup(){
+
+document.getElementById("bigPopup")
+.style.display="none";
+
+}
+
+function openTopup(){
+
+document.getElementById("topupPopup")
+.style.display="flex";
+
+}
+
+function closeTopup(){
+
+document.getElementById("topupPopup")
+.style.display="none";
+
+}
+
+function topupCoin(){
+
+let amount =
+parseInt(
+document.getElementById("topupInput").value
+);
+
+if(isNaN(amount) || amount < 1000){
+
+alert("Minimal top up 1.000");
+
+return;
+
+}
+
+saldo += amount;
+
+updateSaldo();
+
+alert("Top up berhasil");
+
+closeTopup();
+
+}
+
+function openRedeem(){
+
+document.getElementById("redeemPopup")
+.style.display="flex";
+
+}
+
+function closeRedeem(){
+
+document.getElementById("redeemPopup")
+.style.display="none";
+
+}
+
+function redeemCoin(){
+
+let rekening =
+document.getElementById("rekening").value;
+
+let amount =
+parseInt(
+document.getElementById("redeemInput").value
+);
+
+if(!rekening){
+
+alert("Masukkan nomor Dana");
+
+return;
+
+}
+
+if(isNaN(amount) || amount < 1000){
+
+alert("Minimal tarik saldo 1.000");
+
+return;
+
+}
+
+if(amount > saldo){
+
+alert("Saldo tidak cukup");
+
+return;
+
+}
+
+saldo -= amount;
+
+updateSaldo();
+
+alert(
+"Penarikan Rp " +
+amount.toLocaleString("id-ID") +
+" berhasil diproses"
+);
+
+document.getElementById("rekening").value = "";
+document.getElementById("redeemInput").value = "";
+
+closeRedeem();
+
+}
+
+</script>
+
+</body>
+  </html>
