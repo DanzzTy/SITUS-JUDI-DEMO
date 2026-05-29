@@ -434,17 +434,70 @@ PLAY
 
 </div>
 
-<div class="slot-page">
+<div class="slot-page"
+id="slotPage"
+style="display:none">
 
-<h2 id="gameTitle">ZEUS POWER</h2>
+<button
+class="main-btn"
+style="
+width:auto;
+margin-bottom:20px;
+background:#ef4444;
+color:white;
+"
+onclick="closeGame()">
+← KEMBALI
+</button>
+
+<h2 id="gameTitle">🎰 ZEUS POWER</h2>
+
+<p id="gameDesc"
+style="
+opacity:.8;
+margin-top:5px;
+margin-bottom:20px;
+">
+Game Demo
+</p>
 
 <div class="bet-area">
 
-<input type="number" id="bet" placeholder="Masukkan taruhan virtual">
+<input
+type="number"
+id="bet"
+placeholder="Masukkan taruhan">
 
-<button class="spin-btn" onclick="spin()">
+<button
+class="spin-btn"
+onclick="spin()">
 SPIN
 </button>
+
+</div>
+
+<div class="reels">
+
+<div class="reel">
+<img id="r1" src="img/slot.png">
+</div>
+
+<div class="reel">
+<img id="r2"
+src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png">
+</div>
+
+<div class="reel">
+<img id="r3"
+src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+</div>
+
+</div>
+
+<div class="result"
+id="result">
+Tekan spin untuk bermain
+</div>
 
 </div>
 
@@ -583,19 +636,75 @@ localStorage.setItem("user",user);
 document.getElementById("loginPopup").style.display="none";
 }
 
+<script>
+
 function openGame(name){
-document.getElementById("gameTitle").innerText = name;
+
+const slotPage =
+document.getElementById("slotPage");
+
+slotPage.style.display = "block";
+
+let title = "";
+let desc = "";
+let color = "";
+
+if(name === "ZEUS POWER"){
+
+title = "⚡ ZEUS POWER";
+desc = "Petir bonus max win";
+color = "#f59e0b";
+
 }
 
-const imgs = [
+else if(name === "DRAGON FIRE"){
 
-"img/slot.png",
+title = "🐉 DRAGON FIRE";
+desc = "Naga api keberuntungan";
+color = "#ef4444";
 
-"https://cdn-icons-png.flaticon.com/512/833/833472.png",
+}
 
-"https://cdn-icons-png.flaticon.com/512/3523/3523063.png"
+else if(name === "FORTUNE KING"){
 
-];
+title = "👑 FORTUNE KING";
+desc = "Raja spin keberuntungan";
+color = "#22c55e";
+
+}
+
+document.getElementById("gameTitle").innerText =
+title;
+
+document.getElementById("gameDesc").innerText =
+desc;
+
+slotPage.style.border =
+"2px solid " + color;
+
+slotPage.style.boxShadow =
+"0 0 30px " + color;
+
+window.scrollTo({
+top:slotPage.offsetTop - 70,
+behavior:"smooth"
+});
+
+}
+
+function closeGame(){
+
+document.getElementById("slotPage")
+.style.display = "none";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+</script>
 
 function rand(){
 return imgs[Math.floor(Math.random()*imgs.length)];
